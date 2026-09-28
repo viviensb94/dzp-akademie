@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FörderDigital · Kundenreise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F5F7; --panel:#FFFFFF; --line:#E9EAEE; --line2:#F0F1F4;
+  --ink:#111827; --ink2:#6B7280; --ink3:#9AA1AC;
+  --blue:#2563EB; --blue2:#3B82F6; --blueBg:#EAF0FE;
+  --amber:#B45309; --amberBg:#FEF3C7;
+  --violet:#7C3AED; --violetBg:#F3ECFE;
+  --green:#16A34A; --greenBg:#E7F6EC; --red:#EF4444; --navy:#0E1D30;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --sb:236px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.ic.sm{width:15px;height:15px}
+a{color:inherit;text-decoration:none}
+
+/* layout */
+.shell{display:flex;min-height:100vh}
+/* sidebar */
+.sb{width:var(--sb);flex:0 0 var(--sb);background:var(--panel);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sb .brand{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 10px;font-weight:600;font-size:15px}
+.sb .brand .chev{color:var(--ink3)}
+.navlabel{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--ink3);padding:14px 18px 6px}
+.nav{display:flex;flex-direction:column;gap:1px;padding:0 10px}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;color:#5b6472;font-weight:500;font-size:13.5px}
+.nav a:hover{background:#F6F7F9}
+.nav a.on{background:var(--blueBg);color:var(--blue)}
+.nav a.sub{padding-left:34px;font-size:13px}
+.sb .grp{display:flex;align-items:center;gap:11px;padding:11px 20px 5px;color:#4b5563;font-weight:600;font-size:13.5px}
+.sb .foot{margin-top:auto;border-top:1px solid var(--line);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.av{width:30px;height:30px;border-radius:50%;background:#EAF0FE;color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:13px}
+.sb .foot .who{font-size:13px;font-weight:600;line-height:1.1}.sb .foot .who small{display:block;color:var(--ink3);font-weight:500;font-size:11px}
+.sb .foot .lg{margin-left:auto;color:var(--ink3)}
+
+/* main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:50px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px;position:sticky;top:0;z-index:20}
+.top .fd{display:flex;align-items:center;gap:9px;color:var(--ink2)}
+.fdmark{width:22px;height:22px;border-radius:6px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:-.02em}
+.top .bc{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--ink3)}
+.top .bc b{color:var(--ink2)}
+.top .search{margin-left:auto;display:flex;align-items:center;gap:8px;background:#F3F4F6;border:1px solid var(--line);border-radius:9px;padding:7px 11px;color:var(--ink3);font-size:12.5px;width:210px}
+.top .search kbd{margin-left:auto;background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:10px}
+.content{padding:20px 22px 60px;max-width:1360px;width:100%}
+
+/* lead header */
+.lhead{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:0 0 16px}
+.lhrow{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.back{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2);background:#fff}
+.lname{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:2px 0 0}
+.lsub{color:var(--ink3);font-size:12px;margin:3px 0 0}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill.blue{background:var(--blueBg);color:var(--blue)} .pill.gray{background:#F1F2F4;color:#6B7280}
+.pill.amber{background:var(--amberBg);color:var(--amber)} .pill.violet{background:var(--violetBg);color:var(--violet)}
+.pill.green{background:var(--greenBg);color:var(--green)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px;font-weight:600;color:#374151;cursor:pointer}
+.btn:hover{border-color:#d3d6db}
+.btn.ai{background:var(--blueBg);border-color:transparent;color:var(--blue)}
+.btn.red{color:var(--red);border-color:#f3d3d3}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover{background:#1d4fd7}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* CRM stepper */
+.stepper{display:flex;align-items:center;margin:18px 2px 6px;gap:0}
+.stepper .node{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
+.stepper .dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #D8DBE1;z-index:2}
+.stepper .node.done .dot{background:var(--blue);border-color:var(--blue)}
+.stepper .node.cur .dot{border-color:var(--blue);box-shadow:0 0 0 4px var(--blueBg)}
+.stepper .bar{position:absolute;top:6px;left:50%;width:100%;height:2px;background:#E3E5EA;z-index:1}
+.stepper .node.done .bar{background:var(--blue)}
+.stepper .node:last-child .bar{display:none}
+.stepper .lb{font-size:11px;color:var(--ink3);margin-top:8px;font-weight:600;white-space:nowrap}
+.stepper .node.cur .lb,.stepper .node.done .lb{color:var(--ink2)}
+.selrow{display:flex;gap:22px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.field-inline{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
+.sel{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.gm-cta{margin-left:auto}
+
+/* Kundenreise */
+.kr{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.kr .kibar{display:flex;align-items:center;gap:10px;padding:12px 18px;background:linear-gradient(90deg,#0B1220,#1b2740);color:#dfe6f5;font-size:13px}
+.kibar .live{width:9px;height:9px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}70%{box-shadow:0 0 0 7px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.kibar b{color:#fff}.kibar .tag2{margin-left:auto;font-size:11px;color:#9fb0d0;display:flex;align-items:center;gap:6px}
+.krgrid{display:grid;grid-template-columns:250px 1fr 300px;gap:0}
+.krcol{padding:18px}
+.krsteps{border-right:1px solid var(--line2)}
+.krsteps .h,.krside .h{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ink3);margin:0 0 12px}
+.st{display:flex;gap:11px;align-items:flex-start;padding:10px;border-radius:10px;cursor:pointer;margin:0 0 2px}
+.st:hover{background:#F7F8FA}
+.st.cur{background:var(--blueBg)}
+.st .num{width:22px;height:22px;border-radius:50%;border:2px solid #D8DBE1;color:var(--ink3);display:grid;place-items:center;font-size:11px;font-weight:700;flex:0 0 auto;background:#fff}
+.st.done .num{background:var(--green);border-color:var(--green);color:#fff}
+.st.cur .num{border-color:var(--blue);color:var(--blue)}
+.st .t{font-size:13px;font-weight:600;line-height:1.2}
+.st .w{font-size:11px;color:var(--ink3);margin-top:2px}
+.st.cur .t{color:var(--blue)}
+
+.krmain{min-width:0}
+.krmain .ph-who{display:inline-flex;gap:6px;margin:0 0 8px}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px}
+.badge.men{background:#EEF0F3;color:#374151}
+.badge.sys{background:var(--blueBg);color:var(--blue)}
+.badge.ki{background:#0B1220;color:#cfe}
+.krmain h3{font-size:18px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
+.krmain .goal{color:var(--ink2);font-size:12.5px;margin:0 0 14px}
+.say{background:#F8FAFF;border:1px solid #E3ECFF;border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:13px 16px;margin:0 0 14px;font-size:15px;line-height:1.5;color:#1f2a44}
+.say .tag{display:block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.fieldset{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld.full{grid-column:1/-1}
+.fld label{font-size:11.5px;color:var(--ink2);font-weight:600;display:flex;align-items:center;gap:6px}
+.fld input,.fld select{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink);width:100%}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blueBg)}
+.kichip{font-size:10px;font-weight:700;color:var(--blue);background:var(--blueBg);padding:2px 7px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;color:#4b5563;cursor:pointer;user-select:none}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.krmain .note{font-size:12px;color:var(--ink2);background:#FBFBFC;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;margin:0 0 14px;line-height:1.5}
+.krmain .note b{color:var(--ink)}
+.rowbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.done-btn{margin-left:auto}
+
+/* right rail */
+.krside{background:#FBFCFE;border-left:1px solid var(--line2)}
+.calc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 14px}
+.calc h4{margin:0 0 12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.calc .cin{margin:0 0 10px}
+.calc .cin label{font-size:11px;color:var(--ink2);font-weight:600;display:block;margin:0 0 4px}
+.calc .cin input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit}
+.calc .res{border-top:1px dashed var(--line);margin-top:6px;padding-top:12px}
+.calc .r{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--ink2)}
+.calc .r b{color:var(--ink);font-weight:700}
+.calc .big{margin-top:8px;background:var(--blue);color:#fff;border-radius:10px;padding:12px;text-align:center}
+.calc .big .n{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.calc .big .l{font-size:11px;opacity:.85;margin-top:2px}
+.calc .big.navy{background:var(--navy)}
+.calc .disc{font-size:10.5px;color:var(--ink3);margin:8px 0 0;line-height:1.4}
+.dtoggle{background:none;border:none;color:var(--blue);font-weight:600;font-size:12px;cursor:pointer;padding:0 0 8px;font-family:inherit}
+.cin2{display:flex;gap:10px;margin:0 0 8px}
+.cin2>div{flex:1}
+.cin2 label{font-size:11px;color:var(--ink2);font-weight:600;display:block;margin:0 0 4px}
+.cin2 input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit}
+.effnote{font-size:11.5px;color:var(--ink2);margin:0 0 6px;line-height:1.4}
+.wf{color:var(--ink3);font-weight:500;font-size:10px}
+.mininote{font-size:11px;color:var(--ink3);margin:0 0 4px;line-height:1.4}
+.hint5075{font-size:12px;line-height:1.45;background:#FFF7E6;border:1px solid #F5E2B3;border-radius:8px;padding:9px 11px;margin:0 0 10px;color:#8a5a00}
+.hint5075 b{color:#7a4f00}
+.feed h4{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ink3);margin:2px 0 10px}
+.fi{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);padding:7px 0;border-top:1px solid var(--line2)}
+.fi:first-of-type{border-top:none}
+.fi .k{width:16px;height:16px;border-radius:50%;background:var(--greenBg);color:var(--green);display:grid;place-items:center;flex:0 0 auto;margin-top:1px}
+.fi b{color:var(--ink);font-weight:600}
+
+.qblock{border-top:1px solid var(--line2);padding:14px 0 6px}
+.qblock:first-child{border-top:none;padding-top:0}
+.qlabel{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--blue);text-transform:uppercase;margin:0 0 8px}
+.qtext{background:#F8FAFF;border:1px solid #E3ECFF;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:10px 14px;font-size:15px;color:#1f2a44;font-weight:500;margin:0 0 10px}
+.qexplain{font-size:12.5px;color:var(--ink2);background:#FBFBFC;border:1px solid var(--line2);border-radius:8px;padding:9px 12px;margin:0 0 8px;line-height:1.45}
+.qexplain b{color:var(--ink)}
+.qstep{display:flex;gap:10px;align-items:flex-start;background:#F8FAFF;border:1px solid #E3ECFF;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:10px 14px;font-size:15px;color:#1f2a44;font-weight:500;margin:0 0 8px;line-height:1.5}
+.qn{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.qmini{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin:0 0 3px}
+.live{border:1px solid var(--line2);border-radius:10px;padding:12px 14px;margin:0 0 8px;background:#fff}
+.livehd{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em}
+.livedot{width:8px;height:8px;border-radius:50%;background:#16a34a;animation:lpulse 1.6s infinite}
+@keyframes lpulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.45)}70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+.livecount{margin-left:auto;font-size:11px;font-weight:700;color:var(--blue);background:var(--blueBg);border-radius:20px;padding:3px 10px;letter-spacing:0;text-transform:none}
+.livesub{font-size:11.5px;color:var(--ink2);margin:8px 0 10px;line-height:1.45}
+.livelist{display:flex;flex-direction:column;gap:6px}
+.lrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:#FBFCFE;animation:lslide .35s ease}
+@keyframes lslide{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.lav{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#E7EDFA;color:var(--blue);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.lname{font-size:13px;font-weight:600;color:var(--ink);line-height:1.2}
+.lmail{font-size:11px;color:var(--ink2)}
+.ltag{margin-left:auto;font-size:10.5px;font-weight:700;border-radius:20px;padding:3px 9px;white-space:nowrap}
+.ltag.vf{background:#FEF3E2;color:#B9741A;border:1px solid #F4D9A6}
+.ltag.n{background:#F1F3F7;color:#6b7280;border:1px solid var(--line2)}
+.cbcard{display:flex;align-items:center;gap:12px;border:1px solid #D8E3FF;background:#F5F8FF;border-radius:10px;padding:13px 15px;margin:0 0 6px}
+.cbcal{flex:0 0 auto;width:38px;height:38px;border-radius:9px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center}
+.cblab{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin:0 0 2px}
+.cbbig{font-size:17px;font-weight:800;color:var(--navy)}
+.cbavail{font-size:11.5px;color:#127a3e;font-weight:600;margin:8px 0 6px;display:flex;align-items:center;gap:5px}
+.cbavail svg{width:13px;height:13px}
+.slots{display:flex;gap:6px;flex-wrap:wrap}
+.slot{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:600;color:#4b5563;cursor:pointer}
+.slot.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.sseg{margin:0}
+.spause{display:flex;align-items:center;gap:8px;margin:9px 0;color:#9aa4b2;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.spause::before,.spause::after{content:"";flex:1;height:1px;background:#E3ECFF}
+.docs{border:1px solid var(--line2);border-radius:10px;padding:12px 14px;margin:10px 0 6px;background:#FBFCFE}
+.docshd{font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 9px;display:flex;align-items:center;gap:7px}
+.docshd svg{width:15px;height:15px;color:var(--blue)}
+.docitem{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink);padding:4px 0;font-weight:500}
+.docitem svg{flex:0 0 auto;width:15px;height:15px;color:#127a3e;margin-top:1px}
+.docsub{font-size:11.5px;color:var(--ink2);margin:8px 0 0;line-height:1.45}
+.saylist{margin:7px 0 0;padding-left:4px;font-weight:600}
+.saylist div{padding:1.5px 0}
+.proto{border:1px solid #D8E3FF;background:#F5F8FF;border-radius:10px;padding:12px 14px;margin:6px 0}
+.protohd{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin:0 0 8px}
+.protohd svg{width:14px;height:14px}
+.prototxt{font-size:13.5px;color:#1f2a44;line-height:1.5;font-weight:500}
+.protosub{font-size:11.5px;color:var(--ink2);margin:9px 0 0;line-height:1.45}
+.cost{border:1px solid #BBE7CC;background:#F2FBF5;border-radius:11px;padding:14px 16px;margin:0 0 8px}
+.costtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#127a3e;background:#DDF3E6;border-radius:20px;padding:3px 10px;margin:0 0 9px}
+.costrow{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.costlab{font-size:13.5px;font-weight:700;color:var(--ink)}
+.costsub{font-size:11.5px;color:var(--ink2);margin-top:2px}
+.costbig{font-size:30px;font-weight:800;color:#127a3e;white-space:nowrap}
+.costnote{font-size:12px;color:#2f6f49;margin:10px 0 0;font-weight:500}
+.cost.hon{border-color:#D8E3FF;background:#F5F8FF}
+.costtag.hon{color:var(--blue);background:#E3ECFF}
+.costbig.hon{color:var(--blue)}
+.costnote.hon{color:#8a6d1f}
+.varswitch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.vswlab{font-size:11px;font-weight:700;color:var(--ink2);margin-right:2px}
+.vchip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:#4b5563;cursor:pointer}
+.vchip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.draftbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a6d1f;background:#FBF1D8;border:1px solid #EAD9A0;border-radius:6px;padding:3px 8px;margin:0 0 8px}
+.crit{background:#FFF8EE;border:1px solid #F4D9A6;border-left:3px solid #E0942A;border-radius:0 8px 8px 0;padding:11px 14px;margin:0 0 12px}
+.crit .clab{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#B9741A;margin:0 0 5px}
+.crit .ctxt{font-size:14px;color:#3d2f18;line-height:1.5;font-weight:500}
+.anlhd{font-size:12.5px;font-weight:700;color:var(--ink);margin:2px 0 8px}
+.baway{border:1px solid var(--line2);border-radius:8px;padding:10px 12px;margin:0 0 8px;background:#fff}
+.baway h5{margin:0 0 6px;font-size:12px;color:var(--blue);font-weight:700;letter-spacing:.02em}
+.baway ol{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink2);line-height:1.55}
+.baway ol li{margin:0 0 3px}
+.baway b{color:var(--ink)}
+.phone{font-weight:700;color:var(--blue)}
+.btn.ok{background:#127a3e;border-color:#127a3e;color:#fff;cursor:default}
+.btn.sm2{padding:7px 12px;font-size:12px}
+.planblink{background:none;border:none;color:var(--blue);font-size:12.5px;font-weight:600;cursor:pointer;padding:8px 0 4px;text-align:left;display:block}
+.planb{border:1px solid var(--line2);border-radius:10px;padding:6px 12px 10px;margin:2px 0 8px;background:#FBFCFE}
+.pbrow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line2)}
+.pbrow:first-child{border-top:none}
+.pbnum{flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:#DCE6FF;color:var(--blue);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.pbh{font-size:13px;font-weight:700;color:var(--ink)}
+.pbsub{font-size:11.5px;color:var(--ink2);margin:1px 0 7px;line-height:1.45}
+.pbinline{display:flex;gap:6px;align-items:center}
+.pbinline input{flex:1;min-width:0;border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-size:12px;color:var(--ink)}
+.pbcode{display:flex;gap:10px;flex-wrap:wrap}
+.pblabel{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin:0 0 3px}
+.linkbig{font-size:15px;font-weight:700;color:var(--blue);background:#EEF3FF;border:1px solid #D8E3FF;border-radius:7px;padding:8px 11px}
+.codebig{font-size:15px;font-weight:800;letter-spacing:.12em;color:var(--ink);background:#F1F3F7;border:1px solid var(--line);border-radius:7px;padding:8px 13px}
+.ynrow{display:flex;gap:8px;margin:0 0 8px;flex-wrap:wrap}
+.ynbtn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;color:#4b5563;cursor:pointer}
+.ynbtn:hover{border-color:#cbd0d8}
+.ynbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.qinfo{display:none;font-size:13px;line-height:1.5;background:#F5F8FF;border:1px solid #E1EAFF;border-radius:8px;padding:10px 12px;margin:2px 0 4px;color:#26365a}
+.qinfo b{color:var(--blue)}
+.round{border-top:1px dashed var(--line);margin-top:12px;padding-top:12px}
+.round .rlabel{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.round.alt .rlabel{color:var(--ink3)}
+.round .rec{font-size:13px;color:var(--ink2);margin:0 0 8px}
+.round .rec b{color:var(--ink);font-size:16px}
+.strat{font-size:12px;line-height:1.45;color:var(--ink2);background:#F5F8FF;border:1px solid #E1EAFF;border-radius:8px;padding:9px 11px;margin:10px 0 0}
+.strat b{color:var(--blue)}
+.hl{background:var(--blueBg);color:var(--blue);font-weight:700;padding:1px 8px;border-radius:6px;white-space:nowrap}
+.jarvis{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#2b3a5c,#0a1120);color:#cfe;display:grid;place-items:center;
+  font-weight:800;box-shadow:0 10px 30px rgba(11,18,32,.4);border:1px solid #26314b;cursor:pointer}
+
+@media (max-width:1100px){.krgrid{grid-template-columns:1fr}.krsteps{border-right:none;border-bottom:1px solid var(--line2)}.krside{border-left:none;border-top:1px solid var(--line2)}}
+@media (max-width:860px){.sb{display:none}}
+/* Express-Ausgang (Zeit-Check) + Branding */
+.tcheck{border:1px dashed #C9D6F5;background:#F8FAFF;border-radius:10px;padding:12px 14px;margin:12px 0 0}
+.tclab{font-size:12.5px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.tcbtns{display:flex;gap:8px;flex-wrap:wrap}
+.tcbtn{flex:1;min-width:190px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;font-size:12.5px;font-weight:600;color:#4b5563;cursor:pointer;text-align:left}
+.tcbtn.on{border-color:var(--blue);background:var(--blueBg);color:var(--blue)}
+.tcres{font-size:13px;color:#1f2a44;margin:10px 0 0;line-height:1.5}
+.tcres b{color:var(--blue)}
+.tcoview{margin:14px 0 0;display:none}
+.tcoview.show{display:block}
+.tcovhd{font-size:11px;font-weight:700;color:#8a94a6;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px}
+.tcway{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff;margin:0 0 8px;transition:border-color .15s,background .15s;display:none}
+.tcway:last-child{margin-bottom:0}
+.tcway.active{display:block;border-color:var(--blue);background:var(--blueBg)}
+.tcwayhd{font-size:12.5px;font-weight:700;color:var(--navy);margin:0 0 6px}
+.tcwaytag{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11px;font-weight:800;margin-right:4px}
+.tcwaytag.std{background:#E6F4EA;color:#1E7B39}
+.tcwaytag.exp{background:#FFF1DC;color:#B4700A}
+.tcway .sseg{font-size:13px}
+.tcwaynote{margin-top:7px;font-size:11.5px;color:#6b7686;font-weight:600}
+.expbanner{background:#FFF8EE;border:1px solid #F4D9A6;border-left:3px solid #E0942A;border-radius:0 8px 8px 0;padding:8px 12px;margin:0 0 12px;font-size:12px;font-weight:600;color:#8a5a12}
+.st .fu{display:inline-block;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:#B9741A;background:#FEF3E2;border:1px solid #F4D9A6;border-radius:5px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.brandnote{font-size:11.5px;color:var(--blue);background:var(--blueBg);border-radius:6px;padding:2px 8px;display:inline-block;font-weight:600;margin:0 0 8px}
+/* Gespräch 2 · Live-Cockpit */
+.cock{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:14px;margin:0 0 14px}
+.cock h4{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--navy);margin:0 0 10px}
+.szlab{font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px}
+.szrow{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 13px}
+.szchip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;color:#4b5563;cursor:pointer}
+.szchip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.ckptop{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 6px}
+.ckpn{font-size:22px;font-weight:800;color:var(--navy)}
+.ckpl{font-size:11px;color:var(--ink3);line-height:1.35}
+.ckbar{height:8px;border-radius:6px;background:#EDF0F5;overflow:hidden;margin:0 0 12px}
+.ckbarfill{height:100%;background:#16a34a;border-radius:6px;transition:width .4s}
+.ckchef{display:flex;align-items:center;gap:6px;font-size:11.5px;padding:9px 0;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin:0 0 9px;color:var(--ink);font-weight:600}
+.cklist{display:flex;flex-direction:column;gap:3px}
+.ckrow{display:flex;align-items:center;gap:8px;padding:5px 0}
+.ckav{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#E7EDFA;color:var(--blue);font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ckname{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.15}
+.ckmail{font-size:10px;color:var(--ink3)}
+.ckvip{display:inline-block;font-size:8.5px;font-weight:800;border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:middle}
+.ckvip.ue{background:#EAF0FE;color:var(--blue)}
+.ckvip.sb{background:#F3E8FF;color:#7c3aed}
+.ckst{margin-left:auto;font-size:10px;font-weight:700;border-radius:20px;padding:2px 8px;white-space:nowrap}
+.ckst.s3{background:#DDF3E6;color:#127a3e}
+.ckst.s2{background:#FEF3E2;color:#B9741A}
+.ckst.s1{background:#EAF0FE;color:var(--blue)}
+.ckst.s0{background:#F1F3F7;color:#8a94a3}
+.ipadbox{background:#F8FAFF;border:1px solid #E3ECFF;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:11px 14px;margin:0 0 10px}
+.ipadhd{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--blue);margin:0 0 5px;display:flex;align-items:center;gap:6px}
+.ipadbox .say2{font-size:13.5px;color:#1f2a44;line-height:1.5}
+.ipadchk{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:12.5px;font-weight:600;color:#4b5563;background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+.ipadchk.on{background:#127a3e;border-color:#127a3e;color:#fff}
+.ipadchk .box{width:15px;height:15px;border-radius:4px;border:1.5px solid #b8c0cc;display:flex;align-items:center;justify-content:center;font-size:10px}
+.ipadchk.on .box{border-color:#fff}
+.lagbox{background:#FFF8EE;border:1px solid #F4D9A6;border-left:3px solid #E0942A;border-radius:0 8px 8px 0;padding:10px 13px;margin:0 0 12px;font-size:13px;color:#3d2f18;line-height:1.5}
+.zoomcard{display:flex;align-items:center;gap:12px;border:1px solid #D8E3FF;background:#F5F8FF;border-radius:10px;padding:13px 15px;margin:6px 0 0}
+.zoomic{flex:0 0 auto;width:38px;height:38px;border-radius:9px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center}
+.forkbtns{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 0}
+.forkbtn{flex:1;min-width:180px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;font-size:13px;font-weight:600;color:#374151;cursor:pointer;text-align:left}
+.forkbtn.on{border-color:var(--blue);background:var(--blueBg);color:var(--blue)}
+.exitcard{background:#F6F8FC;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0 0}
+</style>
+</head>
+<body>
+<svg style="display:none">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 3v3M16 3v3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 3-4.5 5.5-4.5S13.9 16 14.5 19"/><path d="M16 7.5a3 3 0 010 5.5M20.5 19c-.4-2-1.6-3.3-3.2-3.9"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24"><path d="M16 7.5A5.5 5.5 0 108 16M5 11h7M5 13.5h6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6zM10 20a2 2 0 004 0"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="8" r="2.4"/><path d="M6 8.5v7M8.4 6.5H14c2 0 2 1.5 2 3"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5h11a2 2 0 012 2V20H7a2 2 0 01-2-2z"/><path d="M5 17.5A2 2 0 017 16h11"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.4-4A8 8 0 1112 20a8 8 0 01-4-1z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4L8 10a10 10 0 006 6l2-1.5 4 1.5v3a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 6.5l8 6 8-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 4.9L19 9.7l-4.2 2.4L12 17l-2.8-4.9L5 9.7l5.2-1.8z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M9 15l6-6M10 6l1-1a4 4 0 016 6l-1 1M14 18l-1 1a4 4 0 01-6-6l1-1"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3 7-7 9-4-2-7-4-7-9V6z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2"/></symbol>
+</svg>
+
+<div class="shell">
+  <!-- SIDEBAR -->
+  <aside class="sb">
+    <div class="brand">Vertriebs-CRM <svg class="ic sm chev"><use href="#i-next" transform="rotate(90 12 12)"/></svg></div>
+    <div class="navlabel">NAVIGATION</div>
+    <div class="nav">
+      <a><svg class="ic"><use href="#i-grid"/></svg> Dashboard</a>
+      <a><svg class="ic"><use href="#i-cal"/></svg> Kalender</a>
+      <a><svg class="ic"><use href="#i-users"/></svg> Tippgeber-Ansicht</a>
+      <a><svg class="ic"><use href="#i-euro"/></svg> Meine Provisionen</a>
+      <a><svg class="ic"><use href="#i-chat"/></svg> Nachrichten</a>
+      <a><svg class="ic"><use href="#i-bell"/></svg> Benachrichtigungen</a>
+      <a><svg class="ic"><use href="#i-gear"/></svg> Einstellungen</a>
+    </div>
+    <div class="grp"><svg class="ic"><use href="#i-branch"/></svg> Unternehmens-CRM</div>
+    <div class="nav">
+      <a class="sub on"><svg class="ic sm"><use href="#i-branch"/></svg> Pipeline Unternehmen</a>
+      <a class="sub"><svg class="ic sm"><use href="#i-users"/></svg> Kontakte</a>
+    </div>
+    <div class="grp"><svg class="ic"><use href="#i-users"/></svg> Arbeitslosen-CRM</div>
+    <div class="nav">
+      <a class="sub"><svg class="ic sm"><use href="#i-branch"/></svg> Pipeline Arbeitslose</a>
+      <a class="sub"><svg class="ic sm"><use href="#i-users"/></svg> Kontakte</a>
+    </div>
+    <div class="foot">
+      <div class="av">V</div>
+      <div class="who">Vivien Wolter<small>Admin</small></div>
+      <svg class="ic sm lg"><use href="#i-back" transform="rotate(180 12 12)"/></svg>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="top">
+      <svg class="ic" style="color:var(--ink3)"><use href="#i-grid"/></svg>
+      <div class="fd"><div class="fdmark">FD</div></div>
+      <div class="bc">FÖRDER DIGITAL &nbsp;·&nbsp; <b>Vertriebs-CRM</b></div>
+      <div class="search"><svg class="ic sm"><use href="#i-search"/></svg> Suche <kbd>⌘K</kbd></div>
+    </div>
+
+    <div class="content">
+      <!-- LEAD HEADER -->
+      <div class="lhead">
+        <div class="lhrow">
+          <div class="back"><svg class="ic"><use href="#i-back"/></svg></div>
+          <div style="min-width:200px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div class="lname">Weber Folienkonzepte</div>
+              <span class="pill blue">● Neuer Lead</span>
+              <span class="pill gray">Offen</span>
+            </div>
+            <div class="lsub">Erstellt am 27.08.2026, 12:38 &nbsp;·&nbsp; Lead-ID L-441d</div>
+            <div style="margin-top:8px"><span class="pill violet"><svg class="ic sm"><use href="#i-users"/></svg> Tippgeber: Adrian Babczyk</span></div>
+          </div>
+          <div class="actions">
+            <button class="btn"><svg class="ic sm"><use href="#i-wa"/></svg> WhatsApp</button>
+            <button class="btn"><svg class="ic sm"><use href="#i-phone"/></svg> Lead anrufen</button>
+            <button class="btn"><svg class="ic sm"><use href="#i-doc"/></svg> Anruf protokollieren</button>
+            <button class="btn ai"><svg class="ic sm"><use href="#i-spark"/></svg> AI Summary</button>
+            <button class="btn"><svg class="ic sm"><use href="#i-mail"/></svg> E-Mail senden</button>
+            <button class="btn red"><svg class="ic sm"><use href="#i-trash"/></svg> Löschen</button>
+          </div>
+        </div>
+
+        <!-- CRM stepper -->
+        <div class="stepper" id="crmstep">
+          <div class="node cur"><div class="bar"></div><div class="dot"></div><div class="lb">Neuer Lead</div></div>
+          <div class="node"><div class="bar"></div><div class="dot"></div><div class="lb">Kontaktiert</div></div>
+          <div class="node"><div class="bar"></div><div class="dot"></div><div class="lb">Beratung</div></div>
+          <div class="node"><div class="bar"></div><div class="dot"></div><div class="lb">Datenabfrage</div></div>
+          <div class="node"><div class="bar"></div><div class="dot"></div><div class="lb">Antrag</div></div>
+          <div class="node"><div class="bar"></div><div class="dot"></div><div class="lb">Bei BA</div></div>
+          <div class="node"><div class="dot"></div><div class="lb">Entschieden</div></div>
+        </div>
+
+        <div class="selrow">
+          <div class="field-inline">Phase: <span class="sel">● Neuer Lead ▾</span></div>
+          <div class="field-inline">Aktivität: <span class="sel">● Offen ▾</span></div>
+          <button class="btn primary gm-cta"><svg class="ic sm"><use href="#i-spark"/></svg> Gesprächsmodus aktiv</button>
+        </div>
+      </div>
+
+      <!-- KUNDENREISE -->
+      <div class="kr">
+        <div class="kibar">
+          <span class="live"></span> <b>KI hört mit</b> &nbsp;—&nbsp; transkribiert das Gespräch &amp; füllt die Felder automatisch
+          <span class="tag2"><svg class="ic sm"><use href="#i-shield"/></svg> Aufnahme mit Einwilligung · § 201 StGB</span>
+        </div>
+
+        <div class="krgrid">
+          <!-- steps -->
+          <div class="krcol krsteps">
+            <div class="h">KUNDENREISE · GESPRÄCH 2</div>
+            <div id="steplist"></div>
+          </div>
+
+          <!-- active phase -->
+          <div class="krcol krmain" id="krmain"></div>
+
+          <!-- right rail -->
+          <div class="krcol krside">
+            <div id="cockpit"></div>
+            <div class="feed">
+              <h4>AUS DEM GESPRÄCH ERKANNT</h4>
+              <div id="feed"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jarvis">J</div>
+
+<script>
+/* ============================================================================
+   REGELN / GESCHÄFTSLOGIK  —  ZENTRAL FÜR DIE ENTWICKLUNG (Justin)
+   Alle echten Regeln stehen hier gebündelt. Der restliche Code darunter ist
+   teils Demo/Mockup (simulierter Live-Zulauf, Beispiel-Mitarbeiter, Demo-Slots).
+   Diese Konstanten sind die verbindliche Grundlage fürs echte System.
+   ==========================================================================*/
+const REGELN = {
+  // --- Förderrechner ---
+  kursProTN:      11000,        // € Kurskosten je Teilnehmer (Beispielannahme, anpassbar)
+  lohnBasis:      9500/0.75,    // € Basis Lohnzuschuss (75% entsprechen 9.500 €)
+  langfristigAnteil: 0.50,      // langfristig: mind. die Hälfte der Belegschaft
+
+  // --- Betriebsgröße → Fördersätze (§82 SGB III, Stand 04/2024) ---
+  // <50 MA:    Kurs 100% / Lohn 75%
+  // 50–499 MA: Kurs 50%  / Lohn 50%
+  // ≥500 MA:   Kurs 25%  / Lohn 25%
+  staffel: [
+    { bis: 50,       kurs: 1.00, lohn: 0.75, label: 'unter 50' },
+    { bis: 500,      kurs: 0.50, lohn: 0.50, label: '50–499'   },
+    { bis: Infinity, kurs: 0.25, lohn: 0.25, label: 'ab 500'   }
+  ],
+  // Betriebsgröße = Kopfzahl mit Teilzeit-Gewichtung nach Wochenstunden:
+  //   ≥30h ×1,0 · 20–30h ×0,75 · 10–20h ×0,5 · <10h ×0,25
+  //   Minijobber, Azubis und Praktikanten zählen NICHT mit.
+  teilzeitGewichtung: { vollzeit: 1.0, bis30: 0.75, bis20: 0.5, bis10: 0.25 },
+  // Erste Förderrunde (je 3 Köpfe +1): 1→0, 2–4→1, 5–7→2, 8–10→3 …
+  ersteRundeRegel: 'n<2 ? 0 : Math.floor((n-2)/3)+1',
+
+  // --- Rückruftermin ---
+  rueckrufWerktage: 5,          // 5 Werktage voraus, Wochenende wird übersprungen
+
+  // --- Abschluss-Variante nach hinterlegtem Tippgeber ---
+  // typ 'kostenlos' = klassischer Weg (Standard).
+  // typ 'honorar'   = Erfolgshonorar; 'satz' = Prozentsatz (ENTWURF — Wording/Bezug bestätigen).
+  tippgeberVarianten: {
+    'FMI':      { typ: 'honorar',   satz: 0.15 },
+    'Rüdiger':  { typ: 'honorar',   satz: 0.10 },
+    '_default': { typ: 'kostenlos'              }
+  }
+};
+const steps=[
+ {t:"Eröffnung &amp; Stand spiegeln",id:"eroeffnung2",crm:3,w:"Mensch + System",badge:"sys",
+  goal:"Warm an Gespräch 1 anknüpfen, dann sofort den aktuellen Portal-Stand spiegeln — der Kunde merkt: hier wird mitgeschaut, das ist kein Standard-Nachfassen.",
+  say:{tag:"Was du sagst",txt:"<div class=\"sseg\">„Schön, dass es klappt, Herr Weber — wie besprochen melde ich mich zum vereinbarten Termin, um kurz gemeinsam auf den Stand zu schauen.“</div><div class=\"spause\">Pause</div><div id=\"ad-stand\"></div>"},
+  fields:`<div class="note">Das Cockpit rechts zeigt dir live den Stand aus dem Kundenportal. Steig genau dort ein, wo der Kunde steht — nicht beim Skript von vorne. Wechsle oben das Szenario, um alle Fälle zu sehen.</div>`,
+  note:"", feed:[["Update-Call","gestartet"]]},
+
+ {t:"Nächster Schub",id:"schub",crm:3,w:"Mensch + System",badge:"sys",
+  goal:"Kurz den Stand prüfen, den Unternehmer aktivieren und die Mitarbeiter in Bewegung bringen — und die eine Frage klären: gemeinsamer Zoom oder setzt der Unternehmer es selbst um?",
+  say:{tag:"Was du sagst",txt:"<div id=\"ad-schub\"></div>"},
+  fields:`<div id="ad-schub-fields"></div>`,
+  note:"", feed:[]},
+
+ {t:"Verbindlichkeit &amp; nächster Schritt",id:"verbindlich",crm:4,w:"Mensch",badge:"men",
+  goal:"Verbindlich machen: konkreter nächster Schritt mit Datum. Geht gar nichts, schließen wir sauber und freundlich ab — die Tür bleibt offen.",
+  say:{tag:"Was du sagst",txt:"<div id=\"ad-verb\"></div>"},
+  note:"", feed:[]},
+
+ {t:"Verabschiedung",id:"abschluss2",crm:4,w:"Mensch + System",badge:"sys",
+  goal:"Herzlich verabschieden, Tür offen halten — der Rest läuft über das Portal und die KI.",
+  say:{tag:"Was du sagst",txt:"<div id=\"ad-schluss\"></div>"},
+  note:"", feed:[["Update-Call","abgeschlossen"]]}
+];
+
+let cur=0; const done=new Set(); const feedSeen=new Set();
+let expressMode=false; // Zeit-Check: false = alles jetzt, true = nur Portal-Zugang jetzt, Rest im Folgetermin
+const ONBOARDING_IDS=['einladen','baportal']; // 'portal' bleibt in beiden Wegen aktiv — Zugang ist schnell eingerichtet, Mitarbeiter trägt er danach in Ruhe selbst ein
+const listEl=document.getElementById('steplist');
+const mainEl=document.getElementById('krmain');
+const feedEl=document.getElementById('feed');
+
+function renderList(){
+  listEl.innerHTML=steps.map((s,i)=>`<div class="st ${i===cur?'cur':''} ${done.has(i)?'done':''}" onclick="go(${i})">
+    <div class="num">${done.has(i)?'✓':(i+1)}</div>
+    <div><div class="t">${s.t}${expressMode&&ONBOARDING_IDS.includes(s.id)?'<span class="fu">Folgetermin</span>':''}</div><div class="w">${s.w}</div></div></div>`).join('');
+}
+function renderMain(){
+  const s=steps[cur];
+  const last=cur===steps.length-1;
+  mainEl.innerHTML=`
+    <div class="ph-who"><span class="badge ${s.badge}">${s.w}</span></div>
+    <h3>${s.t}</h3><div class="goal">${s.goal}</div>
+    <div class="say"><span class="tag">${s.say.tag}</span>${s.say.txt}</div>
+    ${s.fields||''}
+    ${s.note?`<div class="note">${s.note}</div>`:''}
+    <div class="rowbtns">
+      <button class="btn done-btn primary" onclick="complete()">
+        <svg class="ic sm"><use href="#i-${last?'check':'next'}"/></svg> ${last?'Gespräch abschließen':'Erledigt · nächster Schritt'}
+      </button>
+    </div>`;
+  if(expressMode){
+    if(s.id==='portal') mainEl.insertAdjacentHTML('afterbegin','<div class="expbanner">⏱ Express-Modus — diesen Schritt bitte trotzdem jetzt erledigen, dauert nur 2 Minuten: Portal-Zugang einrichten. Ergänze danach: „Die Mitarbeiter tragen Sie jetzt nicht ein — das machen Sie ganz in Ruhe selbst, sobald es bei Ihnen passt.“ Mitarbeiter einladen (live) und BA-Zugang übernehmt ihr im Folgetermin.</div>');
+    else if(ONBOARDING_IDS.includes(s.id)) mainEl.insertAdjacentHTML('afterbegin','<div class="expbanner">⏱ Express-Modus — dieser Schritt läuft im vereinbarten Folgetermin. Du kannst ihn überspringen.</div>');
+    else if(s.id==='termin') mainEl.insertAdjacentHTML('afterbegin','<div class="expbanner">⏱ Express-Modus — dies ist der gemeinsame Einrichtungstermin: Mitarbeiter einladen und BA-Zugang füllt ihr hier zusammen aus (Portal-Zugang habt ihr schon).</div>');
+  }
+  renderCockpit();
+  fillAdaptive();
+}
+function pushFeed(i){
+  (steps[i].feed||[]).forEach(([k,v])=>{
+    const id=k+v; if(feedSeen.has(id))return; feedSeen.add(id);
+    const el=document.createElement('div'); el.className='fi';
+    el.innerHTML=`<div class="k"><svg class="ic" style="width:11px;height:11px"><use href="#i-check"/></svg></div><div><b>${k}:</b> ${v}</div>`;
+    feedEl.prepend(el);
+  });
+}
+function go(i){cur=i;renderList();renderMain();}
+function jumpTo(id){const i=steps.findIndex(s=>s.id===id); if(i>=0){go(i);}}
+function setExpress(v,btn){
+  expressMode=v;
+  btn.parentElement.querySelectorAll('.tcbtn').forEach(x=>x.classList.remove('on'));
+  btn.classList.add('on');
+  const ov=document.querySelector('.tcoview'); if(ov)ov.classList.add('show');
+  const wStd=document.getElementById('tcway-std'),wExp=document.getElementById('tcway-exp');
+  if(wStd)wStd.classList.toggle('active',!v);
+  if(wExp)wExp.classList.toggle('active',v);
+  const r=document.getElementById('tcresult'); if(r){
+    r.innerHTML=v?'<button type="button" class="btn dark sm2" style="margin-top:4px" onclick="jumpTo(\'portal\')"><svg class="ic sm"><use href="#i-next"/></svg> Weiter zur Portal-Einladung</button>':'';
+  }
+  renderList();
+}
+function complete(){
+  done.add(cur); pushFeed(cur);
+  advanceCrm();
+  if(cur<steps.length-1){cur++;}
+  renderList();renderMain();
+}
+function advanceCrm(){
+  // move CRM pipeline dot forward as the journey progresses
+  const nodes=[...document.querySelectorAll('#crmstep .node')];
+  // CRM-Phase hängt an der Kennung der Phase (steps[].crm), nicht an der Position
+  const target=(steps[cur] && typeof steps[cur].crm==='number')?steps[cur].crm:0;
+  nodes.forEach((n,idx)=>{n.classList.remove('cur','done'); if(idx<target)n.classList.add('done'); if(idx===target)n.classList.add('cur');});
+}
+// Förderrechner — Konstanten (zentral anpassbar)
+const TOTAL_PCT=0.50;   // langfristig: mind. die Hälfte aller Mitarbeiter
+const KURS=11000, LOHN_BASE=9500/0.75;   // Lohn 75%=9.500€ -> Basis 12.667€
+// § 82 SGB III Betriebsgröße: Kopfzahl mit Teilzeit-Gewichtung nach Wochenstunden
+// bis 10 Std ×0,25 · bis 20 ×0,5 · bis 30 ×0,75 · 30+ ×1,0 · Minijob/Azubi/Praktikant zählen NICHT
+const ma=document.getElementById('ma');
+function eur(x){return Math.round(x).toLocaleString('de-DE')+' €';}
+function val(id){const e=document.getElementById(id);return e?(+e.value||0):0;}
+function setTxt(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
+function setHTML(id,h){const e=document.getElementById(id);if(e)e.innerHTML=h;}
+// Erste-Runde-Regel (je 3 Köpfe +1): 1->0, 2-4->1, 5-7->2, 8-10->3 ...
+function round1(n){return n<2?0:Math.floor((n-2)/3)+1;}
+function sizeInfo(x){
+  if(x>=1&&x<50)return{size:'unter 50',kurs:1,lohn:.75};
+  if(x>=50&&x<500)return{size:'50–499',kurs:.5,lohn:.5};
+  if(x>=500)return{size:'ab 500',kurs:.25,lohn:.25};
+  return{size:'—',kurs:0,lohn:0};
+}
+function calc(){
+  if(!ma)return;
+  const n=+ma.value||0;
+  const vz=val('vz'), t30=val('t30'), t20=val('t20'), t10=val('t10');
+  const detail=(vz+t30+t20+t10)>0;
+  const eff = detail ? (vz + t30*0.75 + t20*0.5 + t10*0.25) : n;
+  const si = sizeInfo(eff);
+  const kursTN = KURS*si.kurs, lohnTN = LOHN_BASE*si.lohn, totalTN = kursTN+lohnTN;
+  setTxt('effnote', detail ? ('Gewichtete Betriebsgröße: '+(Math.round(eff*10)/10)+' → '+si.size) : 'Teilzeit zählt anteilig nach Wochenstunden. Für Grenzfälle die Mengen eintragen — das System gewichtet automatisch.');
+  const h=document.getElementById('hint5075'); if(h) h.style.display=(n>=50&&n<=75)?'block':'none';
+  setTxt('r-size', si.size);
+  setTxt('r-kurs', Math.round(si.kurs*100)+' % · '+eur(kursTN));
+  setTxt('r-lohn', Math.round(si.lohn*100)+' % · '+eur(lohnTN));
+  setTxt('r-tn', eur(totalTN));
+  const r1 = round1(n);
+  const rl = n? Math.max(r1, Math.round(n*TOTAL_PCT)) : 0;
+  setHTML('r1-rec', r1>0 ? ('Empfehlung: Start mit <b>'+r1+'</b> Mitarbeitern') : 'Für 1 Mitarbeiter ist leider keine Förderung möglich.');
+  setHTML('rl-rec', 'Gemeinsam bis zu <b>'+rl+'</b> Mitarbeiter — mind. die Hälfte');
+  setTxt('r1-sum', eur(r1*totalTN));
+  setTxt('rl-sum', eur(rl*totalTN));
+  setTxt('say-r1n', r1); setTxt('say-rln', rl); setTxt('say-r1sum', eur(r1*totalTN)); setTxt('say-rlsum', eur(rl*totalTN));
+  // Phase "Mitarbeiter qualifizieren" / "einladen": Empfehlung live übernehmen
+  setTxt('say-q1n', r1); setTxt('q-chipn', r1); setTxt('live-rec', r1);
+  // Protokoll: echte Rechner-Zahlen
+  setTxt('p-n', n); setTxt('p-size', si.size); setTxt('p-r1', r1); setTxt('p-r1sum', eur(r1*totalTN)); setTxt('p-rlsum', eur(rl*totalTN));
+  const qi=document.getElementById('q-r1input'); if(qi && document.activeElement!==qi) qi.value=r1;
+}
+function toggleDetail(){const d=document.getElementById('detailbox'),b=document.getElementById('dtbtn');const open=d.style.display==='none';d.style.display=open?'block':'none';b.textContent=(open?'▾':'▸')+' Genau bestimmen · Teilzeit / Vollzeit';}
+if(ma)ma.addEventListener('input',calc);
+['vz','t30','t20','t10'].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('input',calc);});
+
+function qa(btn,which){const bl=btn.closest('.qblock');bl.querySelectorAll('.ynbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');bl.querySelectorAll('.qinfo').forEach(i=>i.style.display='none');const info=bl.querySelector('.qinfo.'+which);if(info)info.style.display='block';}
+function syncMA(v){const el=document.getElementById('ma');if(el){el.value=v;calc();}}
+function fire(btn,txt){btn.innerHTML='<svg class="ic sm"><use href="#i-check"/></svg> '+txt;btn.classList.remove('dark');btn.classList.add('ok');btn.disabled=true;}
+function togglePlanb(el){const p=document.getElementById('planb');if(!p)return;const open=p.style.display==='none';p.style.display=open?'block':'none';el.textContent=open?'Plan B ausblenden':'E-Mail nicht angekommen? → Plan B einblenden';}
+function copyLink(btn){try{navigator.clipboard&&navigator.clipboard.writeText('www.foerderdigital.de/einladung');}catch(e){}fire(btn,'Link kopiert');}
+// Live-Zulauf der Mitarbeiter aus dem Kundenportal (Demo-Simulation)
+const liveMA=[
+  {n:'Marco Krause',e:'krause@folien-weber.de'},
+  {n:'Sanja Ilić',e:'ilic@folien-weber.de'},
+  {n:'Piotr Adamski',e:'adamski@folien-weber.de'},
+  {n:'Bettina Voß',e:'voss@folien-weber.de'},
+  {n:'Hakan Demir',e:'demir@folien-weber.de'},
+  {n:'Lena Braun',e:'braun@folien-weber.de'},
+  {n:'Thomas Reuter',e:'reuter@folien-weber.de'}
+];
+let liveTimer=null;
+function initials(n){return n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();}
+function startLive(){
+  if(liveTimer){clearInterval(liveTimer);liveTimer=null;}
+  const list=document.getElementById('livelist'),cnt=document.getElementById('livecount');
+  if(!list)return; list.innerHTML=''; let i=0;
+  const add=()=>{
+    if(i>=liveMA.length){clearInterval(liveTimer);liveTimer=null;return;}
+    const m=liveMA[i++];
+    const row=document.createElement('div'); row.className='lrow';
+    row.innerHTML='<div class="lav">'+initials(m.n)+'</div><div><div class="lname">'+m.n+'</div><div class="lmail">'+m.e+'</div></div><span class="ltag n">eingeladen</span>';
+    list.prepend(row);
+    if(cnt)cnt.textContent=i+' eingeladen';
+  };
+  add(); liveTimer=setInterval(add,1100);
+}
+// Rückruftermin: 5 Werktage ab heute (Start zählt als Werktag 1; Wochenende wird übersprungen)
+function isWeekend(d){const w=d.getDay();return w===0||w===6;}
+function isoLocal(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function calcCallback(start){
+  let d=new Date(start.getFullYear(),start.getMonth(),start.getDate());
+  while(isWeekend(d))d.setDate(d.getDate()+1);
+  let added=0; while(added<4){d.setDate(d.getDate()+1); if(!isWeekend(d))added++;}
+  return d;
+}
+function mondayOf(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());const diff=(x.getDay()+6)%7;x.setDate(x.getDate()-diff);return x;}
+function fillCallback(){
+  const today=new Date(), d=calcCallback(today);
+  const s=d.toLocaleDateString('de-DE',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'});
+  const wd=d.toLocaleDateString('de-DE',{weekday:'long'});
+  const nextWeek=mondayOf(d).getTime()>mondayOf(today).getTime();
+  setTxt('say-cbday', wd+(nextWeek?' nächste Woche':'')); setTxt('cbdate', s+' · 10:00');
+  const alt=document.getElementById('cbalt'); if(alt)alt.value=isoLocal(d);
+  setTxt('p-kosten', curKostenLabel); // Kostenmodell aus der gewählten Variante ins Protokoll übernehmen
+}
+function toggleCbEdit(el){const p=document.getElementById('cbedit');if(!p)return;const open=p.style.display==='none';p.style.display=open?'block':'none';el.textContent=open?'Termin-Änderung schließen':'Termin passt dem Unternehmer nicht? → anderen Termin eintragen';}
+function pickSlot(btn){const box=btn.closest('.slots');box.querySelectorAll('.slot').forEach(s=>s.classList.remove('on'));btn.classList.add('on');}
+function toggleProto(el){const p=document.getElementById('proto');if(!p)return;const open=p.style.display==='none';p.style.display=open?'block':'none';}
+// Abschluss-Variante wird AUTOMATISCH aus dem hinterlegten Tippgeber abgeleitet — keine manuelle Auswahl.
+// Regel-Quelle: REGELN.tippgeberVarianten (Rüdiger → 10 %, FMI → 15 %, sonst → kostenlos).
+const TIPPGEBER='Adrian Babczyk';   // kommt in echt aus dem Lead-Datensatz (Feld „Tippgeber")
+function variantForTippgeber(name){
+  for(const key in REGELN.tippgeberVarianten){
+    if(key==='_default')continue;
+    if(name && name.toLowerCase().includes(key.toLowerCase())) return key;
+  }
+  return '_default';
+}
+let curVariant=variantForTippgeber(TIPPGEBER), curKostenLabel='kostenlos (Standard)';
+// Commitment / Trial-Close: holt die Zusage, bevor das Onboarding startet — leitet in die Portal-Einladung über
+const COMMIT='<div class="spause">Pause</div><div class="sseg">„Und wenn das für Sie passt, bringen wir das direkt gemeinsam in Gang — ich richte Ihnen jetzt in wenigen Minuten Ihren Zugang ein. Sollen wir loslegen?“</div>';
+function setVariant(v){curVariant=v;renderVariant();}
+function renderVariant(){
+  const vs=document.getElementById('varsay'),vf=document.getElementById('varfields');
+  if(!vs||!vf)return;
+  const cfg=REGELN.tippgeberVarianten[curVariant]||REGELN.tippgeberVarianten._default;
+  document.querySelectorAll('.vchip').forEach(c=>c.classList.toggle('on',c.dataset.v===curVariant));
+  if(cfg.typ==='honorar'){
+    const pct=Math.round(cfg.satz*100);
+    vs.innerHTML='<div class="draftbadge">✎ Entwurf — Wording bitte prüfen</div><div class="sseg">„So — und weil Sie sich sicher fragen, was das für Sie kostet, dazu ganz offen:“</div><div class="spause">Pause</div><div class="sseg">„Unser Honorar ist rein <b>erfolgsbasiert</b>: Es fällt nur an, wenn Ihre Förderung tatsächlich bewilligt wird — kein Erfolg, keine Kosten. Es beträgt <b>'+pct+' %</b> der bewilligten Förderung.“</div><div class="spause">Pause</div><div class="sseg">„Und keine Sorge: Wir lassen Sie damit nicht allein. Wir finden immer eine Lösung, die für Sie passt, und begleiten Sie durch den gesamten Prozess.“</div>'+COMMIT;
+    vf.innerHTML='<div class="cost hon"><div class="costtag hon">Variante 2 · Erfolgshonorar · Tippgeber '+curVariant+'</div><div class="costrow"><div><div class="costlab">Erfolgshonorar — nur bei Bewilligung</div><div class="costsub">Kein Erfolg, keine Kosten · Antrag &amp; Begleitung inklusive</div></div><div class="costbig hon">'+pct+'&nbsp;%</div></div><div class="costnote hon">✎ ENTWURF: Prozentsatz und ob kunden- oder trägerseitig noch bestätigen.</div></div>';
+    curKostenLabel='Erfolgshonorar '+pct+'% ('+curVariant+')'; setTxt('p-kosten',curKostenLabel);
+  }else{
+    vs.innerHTML='<div class="sseg">„So — und weil Sie sich sicher fragen, was das Ganze für Sie kostet, dazu ganz klar:“</div><div class="spause">Pause</div><div class="sseg">„Es gibt Fördermittelberatungen und Bildungsträger, die dafür ein Honorar verlangen. Bei uns, den Deutschen Zukunftspartnern, ist das anders: Unser Service ist für Sie <b>komplett kostenlos</b> — Sie zahlen keinen Cent, weder jetzt noch später.“</div><div class="spause">Pause</div><div class="sseg">„Wir übernehmen Ihren kompletten Antrag, begleiten Sie durch den gesamten Prozess, und Sie profitieren einfach von der Förderung. Mehr müssen Sie nicht tun.“</div>'+COMMIT;
+    vf.innerHTML='<div class="cost"><div class="costtag">Variante 1 · Standard</div><div class="costrow"><div><div class="costlab">Ihr Aufwand als Unternehmer</div><div class="costsub">Antrag, Begleitung, gesamter Prozess inklusive</div></div><div class="costbig">0&nbsp;€</div></div><div class="costnote">Komplett kostenlos für den Unternehmer — kein Honorar, keine versteckten Gebühren.</div></div>';
+    curKostenLabel='kostenlos (Standard)'; setTxt('p-kosten',curKostenLabel);
+  }
+}
+/* ===== Gespräch 2 · Live-Cockpit & adaptive Logik ===== */
+const TEAM=[
+ {n:'Michael Berg',  m:'m.berg@folien-weber.de',   vip:'Ü45'},
+ {n:'Sandra Klein',  m:'s.klein@folien-weber.de',  vip:null},
+ {n:'Tobias Lang',   m:'t.lang@folien-weber.de',   vip:null},
+ {n:'Petra Vogt',    m:'p.vogt@folien-weber.de',   vip:'Ü45'},
+ {n:'Ahmet Yıldız',  m:'a.yildiz@folien-weber.de', vip:'SB'},
+ {n:'Julia Fischer', m:'j.fischer@folien-weber.de',vip:null}
+];
+// Status je Mitarbeiter: 0 offen · 1 registriert · 2 Unterlagen tlw. · 3 komplett (Arbeitsvertrag, Lohn, Lebenslauf)
+const SCENARIOS={
+ nichts:{label:'Nichts getan', st:[0,0,0,0,0,0], ba:false, betr:false},
+ lauft: {label:'Läuft an',     st:[3,2,1,1,0,0], ba:true,  betr:true},
+ fast:  {label:'Fast fertig',  st:[3,3,2,2,1,1], ba:true,  betr:true},
+ fertig:{label:'Alles fertig', st:[3,3,3,3,3,3], ba:true,  betr:true}
+};
+let curSZ='lauft';   // Start im Kern-Szenario
+let forkMode=null;   // im „nichts"-Fall: 'zoom' (er will) oder 'exit' (keine Zeit)
+const STLAB=['offen','registriert','Unterlagen tlw.','komplett'];
+function szCounts(){const sc=SCENARIOS[curSZ];const reg=sc.st.filter(x=>x>=1).length,done=sc.st.filter(x=>x>=3).length,tot=TEAM.length;return{sc,reg,done,tot,missing:tot-reg,docsmiss:reg-done};}
+function renderCockpit(){
+  const host=document.getElementById('cockpit'); if(!host)return;
+  const o=szCounts(); const pct=Math.round(o.reg/o.tot*100);
+  const chips=Object.keys(SCENARIOS).map(k=>`<button type="button" class="szchip ${k===curSZ?'on':''}" onclick="setSZ('${k}')">${SCENARIOS[k].label}</button>`).join('');
+  const rows=TEAM.map((m,idx)=>{const l=o.sc.st[idx];const vip=(l>=3&&m.vip)?`<span class="ckvip ${m.vip==='SB'?'sb':'ue'}">${m.vip}</span>`:'';
+    return `<div class="ckrow"><div class="ckav">${initials(m.n)}</div><div style="min-width:0;flex:1"><div class="ckname">${m.n}${vip}</div><div class="ckmail">${m.m}</div></div><span class="ckst s${l}">${STLAB[l]}</span></div>`;}).join('');
+  host.innerHTML=`<div class="cock">
+    <h4><svg class="ic sm" style="color:var(--blue)"><use href="#i-users"/></svg> Live-Cockpit · Kundenportal</h4>
+    <div class="szlab">Demo · Portal-Stand</div><div class="szrow">${chips}</div>
+    <div class="ckptop"><div class="ckpn">${o.reg}<span style="font-size:13px;color:var(--ink3);font-weight:600"> / ${o.tot}</span></div><div class="ckpl" style="text-align:right">registriert<br>${o.done} mit vollst. Unterlagen</div></div>
+    <div class="ckbar"><div class="ckbarfill" style="width:${pct}%"></div></div>
+    <div class="ckchef"><svg class="ic sm" style="color:var(--ink3)"><use href="#i-shield"/></svg> BA-Zugang <b style="color:${o.sc.ba?'#127a3e':'#B9741A'}">${o.sc.ba?'✓':'offen'}</b> · Betriebsnr. <b style="color:${o.sc.betr?'#127a3e':'#B9741A'}">${o.sc.betr?'✓':'offen'}</b></div>
+    <div class="cklist">${rows}</div></div>`;
+}
+function setSZ(k){curSZ=k;forkMode=null;renderCockpit();renderMain();}
+function setFork(m,btn){forkMode=m;if(btn){btn.parentElement.querySelectorAll('.forkbtn').forEach(x=>x.classList.remove('on'));btn.classList.add('on');}const o=document.getElementById('forkout');if(o)o.innerHTML=forkOut(m);}
+function toggleIpad(el){el.classList.toggle('on');const b=el.querySelector('.box');if(b)b.textContent=el.classList.contains('on')?'✓':'';}
+function addWerktage(n){let d=new Date();let a=0;while(a<n){d.setDate(d.getDate()+1);const w=d.getDay();if(w!==0&&w!==6)a++;}return d;}
+function fmtDay(d){return d.toLocaleDateString('de-DE',{weekday:'long',day:'2-digit',month:'2-digit'});}
+function fmtFull(d){return d.toLocaleDateString('de-DE',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'});}
+function fillAdaptive(){setHTML('ad-stand',adStand());setHTML('ad-schub',adSchub());setHTML('ad-schub-fields',adSchubFields());setHTML('ad-verb',adVerb());setHTML('ad-schluss',adSchluss());const o=document.getElementById('forkout');if(o&&forkMode)o.innerHTML=forkOut(forkMode);}
+function adStand(){
+  const o=szCounts();
+  if(curSZ==='nichts') return `<div class="sseg">„Ich habe eben schon in Ihr Portal geschaut — und ganz offen: Bei Ihren Mitarbeitern hat sich seit unserem Gespräch noch nichts getan. Das ist völlig normal, der Alltag kommt schnell dazwischen.“</div><div class="spause">Pause</div><div class="sseg">„Genau deshalb melde ich mich — lassen Sie uns kurz gemeinsam schauen, wie wir Ihre Mitarbeiter jetzt aktivieren.“</div>`;
+  if(curSZ==='fertig') return `<div class="sseg">„Ich schaue gerade mit Ihnen ins Portal — und das ist ausgezeichnet: <b>alle ${o.tot}</b> Mitarbeiter sind registriert und haben ihre Daten vollständig hinterlegt. Das haben Sie wirklich zügig umgesetzt.“</div>`;
+  if(curSZ==='fast') return `<div class="sseg">„Ein kurzer Blick gemeinsam ins Portal — das sieht schon sehr gut aus: <b>${o.reg} von ${o.tot}</b> sind registriert, ${o.done} davon vollständig. Es fehlen nur noch wenige.“</div>`;
+  return `<div class="sseg">„Ein kurzer Blick gemeinsam ins Portal — das läuft gut an: <b>${o.reg} von ${o.tot}</b> Ihrer Mitarbeiter sind bereits registriert. Ein paar Mitarbeiter fehlen aber noch — und die brauchen wir vollständig, bevor wir für Sie loslegen können.“</div>`;
+}
+function adSchub(){
+  const o=szCounts();
+  if(curSZ==='fertig') return `<div class="sseg">„Damit ist Ihr Teil erledigt — mehr müssen Sie nicht tun. Ab jetzt übernehmen wir: Wir gehen mit Ihren vollständigen Datensätzen in den Check-Up. Und wenn der sauber durchläuft, stellen unsere Fördermittel-Experten Ihren Antrag innerhalb von 48 Stunden.“</div><div class="spause">Pause</div><div class="sseg">„Der allerletzte Schritt ist dann ganz einfach: Sie und die betroffenen Mitarbeiter unterschreiben nur noch die fertigen Anträge. Den kurzen Termin dafür melde ich Ihnen rechtzeitig an, sobald alles vorbereitet ist — das ist die Ziellinie.“</div>`;
+  if(curSZ==='nichts') return `<div class="lagbox"><b>Der Engpass:</b> Der Prozess hängt erfahrungsgemäß selten am Unternehmer — sondern an den Mitarbeitern. Sie müssen sich im Portal registrieren und ihre Unterlagen hinterlegen: Arbeitsvertrag, letzte Lohnabrechnung und Lebenslauf. Da hier noch gar nichts passiert ist, ist der gemeinsame Zoom der richtige Weg.</div><div class="sseg">„Mein Vorschlag, damit das jetzt zügig ins Rollen kommt: Wir gehen das einmal <b>gemeinsam per Zoom</b> durch — ich schalte mich dazu, und wir bringen Ihre Mitarbeiter in rund 20 Minuten zusammen ins Portal. Das ist erfahrungsgemäß der schnellste Weg.“</div><div class="spause">Pause</div><div class="sseg">„Oder möchten Sie es lieber selbst in die Hand nehmen?“</div>`;
+  // läuft / fast: aktiv dabei -> KEIN Zoom, nur Anstoß + nächster Check
+  return `<div class="lagbox"><b>Woran es jetzt noch hängt:</b> Die übrigen Mitarbeiter müssen sich noch registrieren und ihre Unterlagen hinterlegen — Arbeitsvertrag, Lohnabrechnung und Lebenslauf.</div><div class="sseg">„Sie sind auf einem sehr guten Weg. Wichtig ist jetzt, dass wirklich alle sich einloggen und ihre Daten vollständig ausfüllen — denn erst mit vollständigen Datensätzen können wir für Sie tätig werden. Bitte erinnern Sie die übrigen Kolleginnen und Kollegen noch einmal daran.“</div><div class="spause">Pause</div><div class="sseg">„Und der Ablauf danach geht schnell: Sobald alle Daten vollständig sind, machen wir den Check-Up, und unsere Fördermittel-Experten stellen Ihren Antrag innerhalb von 48 Stunden. Ganz am Ende unterschreiben Sie und die betroffenen Mitarbeiter nur noch die fertigen Anträge — mehr ist es nicht.“</div><div class="note" style="margin-top:11px"><b>Nur für dich:</b> Der Unternehmer ist aktiv dabei — hier <b>keinen</b> Zoom anbieten. Nur falls er unsicher wirkt oder nicht weiterkommt, kannst du ihm kurz einen gemeinsamen Zoom vorschlagen.</div>`;
+}
+function adSchubFields(){
+  const o=szCounts();
+  if(curSZ==='fertig') return `<div class="rowbtns"><button class="btn dark" onclick="fire(this,'Erste Runde ans Team übergeben')"><svg class="ic sm"><use href="#i-check"/></svg> Erste Förderrunde ans Team übergeben</button></div>`;
+  if(curSZ==='nichts') return `<div class="forkbtns">
+    <button type="button" class="forkbtn" onclick="setFork('zoom',this)"><b>Gemeinsamer Zoom (empfohlen)</b><br>Berater geht es live mit ihm durch</button>
+    <button type="button" class="forkbtn" onclick="setFork('allein',this)"><b>Er nimmt's selbst in die Hand</b><br>Unternehmer aktiviert seine Mitarbeiter selbst</button>
+    <button type="button" class="forkbtn" onclick="setFork('exit',this)"><b>Gerade keine Zeit</b><br>Sauber abschließen, Tür offen lassen</button>
+  </div><div id="forkout"></div>`;
+  // läuft / fast
+  return `<div class="rowbtns"><button class="btn dark" onclick="fire(this,'Erinnerung an offene Mitarbeiter gesendet')"><svg class="ic sm"><use href="#i-mail"/></svg> Offene Mitarbeiter automatisch erinnern${o.missing?` (${o.missing})`:''}</button></div>`;
+}
+function forkOut(m){
+  if(m==='zoom') return `<div class="ipadbox"><div class="ipadhd">★ iPad-Motivation für die Mitarbeiter</div><div class="say2">„Und damit Ihre Mitarbeiter wirklich mitziehen: Für die Weiterbildung stellen wir jedem Teilnehmer ein <b>Apple iPad</b> als Lerngerät — das dürfen sie am Ende sogar behalten. Das ist erfahrungsgemäß der stärkste Anreiz, sich zügig zu registrieren.“</div><button type="button" class="ipadchk" onclick="toggleIpad(this)"><span class="box"></span> iPad-Motivation angesprochen</button></div><div class="zoomcard"><div class="zoomic"><svg class="ic sm"><use href="#i-cal"/></svg></div><div style="flex:1"><div style="font-weight:700;color:var(--navy);font-size:13.5px">Gemeinsamer Zoom-Call</div><div style="font-size:12px;color:var(--ink3)">Berater + Unternehmer · live durch die Mitarbeiter-Daten</div></div><button class="btn dark sm2" onclick="fire(this,'Zoom-Termin vorgeschlagen')">Termin vorschlagen</button></div>`;
+  if(m==='allein') return `<div class="exitcard"><div class="sseg">„Sehr gern. Dann mein Rat, damit es zügig klappt: Sprechen Sie Ihre Mitarbeiter heute noch kurz an — eine kurze Nachricht genügt: ‚Sie haben eine Einladung von mir erhalten. Bitte loggen Sie sich heute noch ein und laden Ihren Arbeitsvertrag, die letzte Lohnabrechnung und Ihren Lebenslauf hoch — das dauert nur zehn Minuten.'“</div><div class="spause">Pause</div><div class="sseg">„Und bleiben Sie dran — lieber einmal freundlich nachfassen als eine Woche warten. Ich schaue in ein paar Tagen erneut ins Portal und melde mich, falls jemand hängen bleibt.“</div></div>`;
+  if(m==='exit') return `<div class="exitcard"><div class="sseg">„Kein Problem, das verstehe ich gut — Sie haben genug um die Ohren. Dann halten wir es so: Alles bleibt für Sie im Portal bereit, und Sie starten, sobald es Ihnen passt.“</div><div class="spause">Pause</div><div class="sseg">„Ihr Zugang bleibt bestehen, und die Förderung ist Ihnen sicher, sobald Ihre Mitarbeiter ihre Daten hinterlegt haben. Melden Sie sich einfach, wenn es besser passt — ich bin jederzeit für Sie da.“</div></div>`;
+  return '';
+}
+function adVerb(){
+  if(curSZ==='fertig') return `<div class="sseg">„Ab hier übernehmen wir komplett: Wir gehen in den Check-Up Ihrer Daten, und bei sauberem Ergebnis reichen unsere Experten den Antrag innerhalb von 48 Stunden ein. Zum Schluss unterschreiben Sie und die betroffenen Mitarbeiter nur noch die fertigen Anträge — den Termin dafür stimme ich mit Ihnen ab, sobald sie vorbereitet sind.“</div>`;
+  if(curSZ==='nichts'){
+    if(forkMode==='exit') return `<div class="sseg">„Dann halte ich für heute fest: Sie starten in Ruhe, sobald es passt — und ich melde mich in etwa zwei Wochen noch einmal ganz unverbindlich, um zu hören, ob ich Sie unterstützen kann. Ist das in Ordnung für Sie?“</div>`;
+    if(forkMode==='zoom') return `<div class="sseg">„Wunderbar. Dann steht unser kurzer Zoom — ich sende Ihnen gleich die Einladung. Bringen Sie einfach Ihre Mitarbeiterliste mit, den Rest gehen wir gemeinsam durch.“</div>`;
+    if(forkMode==='allein'){const d=addWerktage(3);return `<div class="sseg">„Dann halten wir es verbindlich fest: Sie sprechen Ihre Mitarbeiter heute noch an, und ich rufe Sie <b>${fmtDay(d)}</b> noch einmal kurz an, um zu sehen, ob alle registriert sind — das dauert keine fünf Minuten.“</div><div class="cbcard" style="margin-top:10px"><div class="cbcal"><svg class="ic sm"><use href="#i-cal"/></svg></div><div><div class="cblab">Nächster Check · automatisch</div><div class="cbbig">${fmtFull(d)} · 10:00</div></div></div>`;}
+    return `<div class="sseg" style="color:var(--ink3)">Wähle im vorigen Schritt, wie es weitergeht — dann erscheint hier der passende verbindliche Abschluss.</div>`;
+  }
+  // läuft / fast: nächster kurzer Check
+  const d=addWerktage(3);
+  return `<div class="sseg">„Damit wir dranbleiben, machen wir gleich einen kurzen nächsten Check aus: Ich rufe Sie <b>${fmtDay(d)}</b> noch einmal kurz an, und wir schauen, ob alle registriert sind — das dauert keine fünf Minuten.“</div><div class="cbcard" style="margin-top:10px"><div class="cbcal"><svg class="ic sm"><use href="#i-cal"/></svg></div><div><div class="cblab">Nächster Check · automatisch</div><div class="cbbig">${fmtFull(d)} · 10:00</div></div></div>`;
+}
+function adSchluss(){
+  if(curSZ==='fertig') return `<div class="sseg">„Dann sind wir für heute durch — und mein Kompliment, wie zügig Sie das umgesetzt haben. Ich melde mich mit der guten Nachricht zur Bewilligung. Bis dahin!“</div>`;
+  if(curSZ==='nichts'){
+    if(forkMode==='exit') return `<div class="sseg">„Dann wünsche ich Ihnen zunächst eine gute Zeit — ich bleibe an Ihrer Seite. Bis bald, Herr Weber!“</div>`;
+    if(forkMode==='zoom') return `<div class="sseg">„Sehr schön, dann sehen wir uns im Zoom. Bis dahin, Herr Weber — ich freue mich!“</div>`;
+    if(forkMode==='allein') return `<div class="sseg">„Dann sind wir für heute durch — Sie gehen das genau richtig an. Wir hören uns beim kurzen Check, und bis dahin bin ich wie immer für Sie erreichbar. Bis dahin!“</div>`;
+    return `<div class="sseg">„Wir verabschieden uns, sobald oben klar ist, wie es weitergeht.“</div>`;
+  }
+  // läuft / fast
+  return `<div class="sseg">„Dann sind wir für heute durch — Sie machen das genau richtig. Wir hören uns beim kurzen Check, und bis dahin bin ich wie immer für Sie erreichbar. Bis dahin!“</div>`;
+}
+
+renderList();renderMain();pushFeed(0);advanceCrm();
+</script>
+</body>
+</html>
